@@ -335,21 +335,6 @@ app.get('/ispaid', (req, res) => {
   });
 });
 
-
-/*
-async function insert() {
-  const userName = 'john'
-  const pass = 'JohnPayV1'
-  const hashedPassword = await bcrypt.hash(pass, 10)
-  const user = {
-    username: userName,
-    password: hashedPassword
-  }
-  usersDB.insert(user)
-}
-insert()
-*/
-
 app.use((req, res, next) => {
   res.status(404).redirect("/login");
 });
