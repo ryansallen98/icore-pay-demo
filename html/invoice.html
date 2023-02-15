@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --dark1: #0b101b;
+            --dark2: #181e29;
+            --dark3: #353c4a;
+            --light1: #ffffff;
+            --light2: #f0f3f8;
+            --light3: #c9ced6;
+            --blue1: #144ee3;
+            --blue2: #1b6eff;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--dark1);
+            color: var(--light3);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+        }
+
+        section {
+            padding-block: 80px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            margin-inline: auto;
+
+        }
+
+        .form {
+            padding: 66px 55px;
+            background-color: var(--dark2);
+            border-radius: 14px;
+            box-shadow: 0 2px 7px 0 hsla(214.28571428571428, 33.33%, 4.12%, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .input-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--light1);
+        }
+
+        input {
+            width: 100%;
+            padding: 16px 24px;
+            box-sizing: border-box;
+            min-height: 58px;
+            font-weight: 500;
+            line-height: 1.125em;
+            color: var(--light1);
+            background-color: var(--dark3);
+            border: 0px solid var(--dark3);
+            border-radius: 100px;
+        }
+
+        .merchant {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .btn-primary {
+            padding: 20px 24px;
+            width: 100%;
+            font-weight: bold;
+            color: var(--light1);
+            background-color: var(--blue1);
+            border: 0px solid var(--blue1);
+            border-radius: 100px;
+            font-size: 16px;
+        }
+
+        .btn-clear {
+            position: absolute;
+            left: auto;
+            right: -40px;
+            top: 30px;
+            border-radius: 100%;
+            border: none;
+            width: 30px;
+            height: 30px;
+
+        }
+
+        .btn-seconday {
+            padding: 20px 24px;
+            width: 100%;
+            font-weight: bold;
+            color: var(--light1);
+            background-color: var(--dark2);
+            border: 1px solid var(--dark3);
+            border-radius: 100px;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--blue2);
+        }
+
+        .btn-seconday:hover {
+            background-color: var(--dark1);
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: 0px;
+            }
+
+            .form {
+                border-radius: 0px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section>
+            <div class="container">
+                <form id='invoice' action="/invoice" method="post" class="form">
+                    <div class="input-wrapper">
+                        <label>Recipients Name</label>
+                        <input type="text" name="recipient" id="recipient" placeholder="Recipient Name" value='John'
+                            required>
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Offer Name</label>
+                        <input type="text" name="name" id="name" placeholder="Offer Name" value='Offer Name' required>
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Offer Description</label>
+                        <input type="text" name="description" id="description" placeholder="Offer Description"
+                            value='Offer Description' required>
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Merchant Name</label>
+                        <input type="text" name="merchant" id="merchant" placeholder="Merchant Name"
+                            value='Merchant Name' required>
+                    </div>
+                    <div class="merchant-wrapper">
+                        <div class="merchant">
+                            <div class="input-wrapper">
+                                <label>eToken Address</label>
+                                <input type="text" name="merchant-addr-1" id="merchant-addr-1"
+                                    placeholder="eToken Address"
+                                    value='ecash:qrwatjg40pa2gcjttrh552hlmlpnqzhjssgp4wayu8' required>
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Amount</label>
+                                <input type="text" name="amount-1" id="amount-1" placeholder="Amount" value="1"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden">
+                        <input type="text" name="merchantCounter" id="merchantCounter">
+                    </div>
+                    <button class="btn-seconday" type="button" onclick="addMerchant()">Add Merchant</button>
+                    <button class="btn-primary" type="submit">Create Invoice</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script>
+        // counter to keep track of how many merchant fields have been added
+        let merchantCounter = 1;
+        document.getElementById("merchantCounter").value = merchantCounter;
+        /**
+         * Creates a new form element for a merchant's address and amount
+         * and appends it after the first merchant element
+         */
+        function addMerchant() {
+
+            // increment the merchant counter
+            merchantCounter++;
+            document.getElementById("merchantCounter").value = merchantCounter;
+
+
+            const firstMerchant = document.querySelector('.merchant');
+            const newMerchant = document.createElement('div');
+            newMerchant.classList.add('merchant');
+            newMerchant.setAttribute('id', "counter-" + merchantCounter);
+
+            // Create new input wrappers
+            const newInputWrapper1 = document.createElement('div');
+            newInputWrapper1.classList.add('input-wrapper');
+            const newInputWrapper2 = document.createElement('div');
+            newInputWrapper2.classList.add('input-wrapper');
+
+            // Create new labels
+            const newLabel1 = document.createElement('label');
+            newLabel1.innerText = 'eToken Address'
+            const newLabel2 = document.createElement('label');
+            newLabel2.innerText = 'Amount'
+
+            // Create merchant address input
+            const merchantAddrInput = document.createElement('input');
+            merchantAddrInput.setAttribute('id', `merchant-addr-${merchantCounter}`);
+            merchantAddrInput.setAttribute('name', `merchant-addr-${merchantCounter}`);
+            merchantAddrInput.setAttribute('type', 'text');
+            merchantAddrInput.setAttribute('required', true);
+            merchantAddrInput.setAttribute('class', 'input');
+
+            // Create amount input
+            const amountInput = document.createElement('input');
+            amountInput.setAttribute('id', `amount-${merchantCounter}`);
+            amountInput.setAttribute('name', `amount-${merchantCounter}`);
+            amountInput.setAttribute('type', 'text');
+            amountInput.setAttribute('required', true);
+            amountInput.setAttribute('class', 'input');
+
+            // Create delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.innerText = 'x';
+            deleteButton.setAttribute('class', 'btn-clear');
+            deleteButton.setAttribute('type', 'button');
+            deleteButton.addEventListener('click', function () {
+                deleteMerchant(this);
+            });
+
+            // Append elements to the new merchant element
+            newInputWrapper1.appendChild(newLabel1);
+            newInputWrapper1.appendChild(merchantAddrInput);
+            newInputWrapper2.appendChild(newLabel2);
+            newInputWrapper2.appendChild(amountInput);
+            newMerchant.appendChild(newInputWrapper1);
+            newMerchant.appendChild(newInputWrapper2);
+            newMerchant.appendChild(deleteButton);
+
+
+            // insert the new div element after the first merchant element
+            firstMerchant.insertAdjacentElement('afterend', newMerchant);
+        }
+        /**
+         * Removes a merchant element when the delete button is clicked
+         */
+        function deleteMerchant(elem) {
+            // get the parent div of the delete button (the merchant div)
+            const targetMerchant = document.getElementById(`counter-${merchantCounter}`)
+            // remove the targeted merchant div element
+            targetMerchant.parentNode.removeChild(targetMerchant);
+            // decrement the merchant counter
+            merchantCounter--;
+            document.getElementById("merchantCounter").value = merchantCounter;
+        }
+
+
+    </script>
+</body>
+
+</html>
