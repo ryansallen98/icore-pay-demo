@@ -17,7 +17,7 @@ const uri = 'https://bux.digital/v1/pay/?';
 
 // Set the server port to the value specified in the PORT environment variable,
 // or to 3000 if PORT is not set
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 3000;
 
 // Set up JSON body parsing middleware with the specified MIME types and maximum
 // request body size
