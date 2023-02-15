@@ -136,7 +136,7 @@ app.get("/invoice", (req, res) => {
     res.redirect("/login");
     return;
   }
-  res.sendFile(__dirname + '/invoice.html');
+  res.sendFile(__dirname + './html/invoice.html');
 });
 
 // Handle the invoice form submission
@@ -146,7 +146,7 @@ app.post("/invoice", (req, res) => {
     res.redirect("/login");
     return;
   }
-  
+
   const code = Math.random().toString(36).substring(7);
   const invoiceId = Math.random().toString(36).substring(7);
   const filePath = path.join(__dirname, "invoice", code + ".html");
