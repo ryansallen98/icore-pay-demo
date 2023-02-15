@@ -13,7 +13,7 @@ const ecashaddr = require('ecashaddrjs');
 require('dotenv').config();
 const bcrypt = require('bcrypt')
 const app = express();
-const uri = 'http://relay.divyden.com/?';
+const uri = 'https://bux.digital/v1/pay/?';
 
 // Set the server port to the value specified in the PORT environment variable,
 // or to 3000 if PORT is not set
@@ -43,9 +43,9 @@ const generateKey = () => {
 const secretKey = generateKey();
 
 // Create instances of the nedb module for storing data
-const invoiceDB = new Datastore("invoice.db");
-const paidDB = new Datastore("paid.db");
-const usersDB = new Datastore("users.db");
+const invoiceDB = new Datastore("./database/invoice.db");
+const paidDB = new Datastore("./database/paid.db");
+const usersDB = new Datastore("./database/users.db");
 
 // Load the databases from the file system
 invoiceDB.loadDatabase();
@@ -115,7 +115,7 @@ app.set('trust proxy', true);
 // Serve the login form
 app.get("/login", (req, res) => {
   if (!req.user) {
-    res.sendFile(__dirname + '/login.html');
+    res.sendFile(__dirname + './html/login.html');
     return;
   }
   res.redirect("/invoice");
@@ -146,23 +146,7 @@ app.post("/invoice", (req, res) => {
     res.redirect("/login");
     return;
   }
-/*
-  // Validate inputs
-  if (!req.body.amount || !req.body.recipientAddress) {
-    res.send("Error: Missing required fields");
-    return;
-  }
-
-  if (!ecashaddr.isAddress(req.body.recipientAddress)) {
-    res.send("Error: Invalid recipient address");
-    return;
-  }
-
-  if (!Number.isInteger(parseInt(req.body.amount)) || parseInt(req.body.amount) <= 0) {
-    res.send("Error: Invalid invoice amount");
-    return;
-  }
-*/
+  
   const code = Math.random().toString(36).substring(7);
   const invoiceId = Math.random().toString(36).substring(7);
   const filePath = path.join(__dirname, "invoice", code + ".html");
