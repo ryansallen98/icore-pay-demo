@@ -4,6 +4,7 @@ const invoice = document.getElementById('invoice-id').value;
 const address = document.getElementById('address-display').value;
 const amount = document.getElementById('amount-display').value;
 window.addEventListener('load', checkStatus());
+console.log(true)
 
 function checkStatus() {
     fetch(`/ispaid?data={"custom":"${custom}", "invoice":"${invoice}"}`)
