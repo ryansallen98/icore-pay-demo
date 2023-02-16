@@ -13,7 +13,7 @@ const ecashaddr = require('ecashaddrjs');
 require('dotenv').config();
 const bcrypt = require('bcrypt')
 const app = express();
-const uri = 'https://bux.digital/v1/pay/?';
+const uri = 'https://relay.icorepay.io/v1?';
 
 // Set the server port to the value specified in the PORT environment variable,
 // or to 3000 if PORT is not set
