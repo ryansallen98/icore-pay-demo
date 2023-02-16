@@ -98,8 +98,6 @@ passport.use(
   })
 )
 
-
-
 // Serialize the user data and store it in the session
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -112,10 +110,28 @@ passport.deserializeUser((user, done) => {
 
 app.set('trust proxy', true);
 
+// Serve static files such as CSS files
+app.use('/client/css/', express.static(__dirname + '/client/css/'));
+
+app.get("/client/js/script.js", (req, res) => {
+  res.sendFile(__dirname + "/client/js/script.js");
+});
+
+app.get("/client/js/invoice.js", (req, res) => {
+  res.sendFile(__dirname + "/client/js/invoice.js");
+});
+
+app.get("/client/js/icore-payments.js", (req, res) => {
+  res.sendFile(__dirname + "/client/js/icore-payments.js");
+});
+
+app.use('/assets', express.static(__dirname + '/client/assets'));
+
+
 // Serve the login form
 app.get("/login", (req, res) => {
   if (!req.user) {
-    res.sendFile(__dirname + '/client/login.html');
+    res.sendFile(__dirname + '/client/html/login.html');
     return;
   }
   res.redirect("/invoice");
@@ -136,7 +152,7 @@ app.get("/invoice", (req, res) => {
     res.redirect("/login");
     return;
   }
-  res.sendFile(__dirname + '/client/invoice.html');
+  res.sendFile(__dirname + '/client/html/invoice.html');
 });
 
 // Handle the invoice form submission
@@ -149,37 +165,75 @@ app.post("/invoice", (req, res) => {
 
   const code = Math.random().toString(36).substring(7);
   const invoiceId = Math.random().toString(36).substring(7);
-  const filePath = path.join(__dirname, "client", "invoice", code + ".html");
+  const filePath = path.join(__dirname, "client", "html", "invoice", code + ".html");
   const templatePath = path.join(__dirname, "client", "templates", "invoice.ejs");
 
-
-  fs.readFile(templatePath, 'utf8', (err, data) => {
+  fs.readFile(templatePath, 'utf8', async (err, data) => {
     if (err) {
       console.error(err);
       res.status(500).send("Error reading invoice template");
       return;
     }
+    const params = {
+      merchant_name: req.body.merchant,
+      invoice: invoiceId,
+      order_key: code,
+      merchant_addr: [],
+      amount: [],
+      offer_name: req.body.name,
+      offer_description: req.body.description,
+      success_url: req.body.success + '/' + code,
+      cancel_url: req.body.cancel,
+      ipn_url: req.body.ipn,
+      return_json: req.body.returnJson
+    };
+
+    // loop through each merchant field and add the values to the params object
+    for (let i = 0; i < req.body.merchantCounter; i++) {
+      params.merchant_addr.push(req.body[`merchant-addr-${i + 1}`]);
+      params.amount.push(req.body[`amount-${i + 1}`]);
+    }
+
+    console.log(params)
+
+    // create the invoice URI by appending the params to the base URI
+    // encode the key-value pairs of the params object as query parameters
+    const queryParams = Object.keys(params).map((key) => {
+      if (Array.isArray(params[key])) {
+        return `${key}=${encodeURIComponent(JSON.stringify(params[key]))}`;
+      }
+      return `${key}=${encodeURIComponent(params[key])}`;
+    }).join('&');
+
+    // append the query parameters to the URI
+    const getUrl = `${uri}${queryParams}`;
+
+    console.log(getUrl)
+
     const invoiceData = {
       user: req.user.username,
       merchant: req.body.merchant,
-      recipient: req.body.recipient,
       name: req.body.name,
       description: req.body.description,
       custom: code,
       invoice: invoiceId,
       date_issued: new Date(),
-      address: [],
-      amount: [],
+      address: params.merchant_addr,
+      amount: params.amount,
       merchant_counter: req.body.merchantCounter,
     }
 
-    // loop through each merchant field and add the values to the params object
-    for (let i = 0; i < invoiceData.merchant_counter; i++) {
-      invoiceData.address.push(req.body[`merchant-addr-${i + 1}`]);
-      invoiceData.amount.push(req.body[`amount-${i + 1}`]);
-    }
+    console.log(invoiceData)
 
-    console.log(invoiceData);
+    try {
+      // Make the GET request using Axios
+      const response = await axios.get(getUrl);
+      console.log(response.data.paymentUrl)
+      invoiceData.payUrl = response.data.paymentUrl
+      
+    } catch (error) {
+      console.log(error)
+    }
 
     invoiceDB.insert(invoiceData);
 
@@ -198,7 +252,7 @@ app.post("/invoice", (req, res) => {
 });
 
 app.get("/invoice/:code", (req, res) => {
-  const filePath = path.join(__dirname, "client", "invoice", req.params.code + ".html");
+  const filePath = path.join(__dirname, "client", "html", "invoice", req.params.code + ".html");
   res.sendFile(filePath);
 });
 

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <link rel="stylesheet" href="/client/css/normalize.css">
+    <link rel="stylesheet" href="/client/css/components.css">
+    <link rel="stylesheet" href="/client/css/icore-payments.css">
+    <style>
+        .position-absolute.bg-grid.extended {
+            background-image: repeating-linear-gradient(0deg, #0b101b, rgba(11, 16, 27, 0.38) 50%, #0b101b), url('../assets/shape-grid.svg');
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page-wrapper">
+        <section class="wf-section">
+            <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease"
+                data-easing2="ease" role="banner" class="header-wrapper simple w-nav">
+                <div class="container-default">
+                    <div class="header-content-wrapper">
+                        <div class="header-middle">
+                            <a href="#" class="header-logo-link w-nav-brand"><img src="../assets/icorepay-blue.svg"
+                                    loading="lazy" alt="" class="image logo"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="overflow-hidden position-relative">
+            <section class="section hero form wf-section">
+                <div class="container-default w-container">
+                    <div class="inner-container _754px center">
+                        <div class="inner-container _675px center">
+                            <div class="card demo">
+                                <div class="demo-form-block w-form">
+                                    <form id="form" name="wf-form-Demo" data-name="Demo" method="post" action="/invoice"
+                                        class="demo-form">
+                                        <div class="input-wrapper"><label for="merchant">Merchant Name</label><input
+                                                type="text" class="input w-input" maxlength="256" name="merchant"
+                                                data-name="merchant" placeholder="e.g. iCore Pay" id="merchant"
+                                                required="" value='Merchant Name'></div>
+                                        <div class="input-wrapper"><label for="name">Offer Name <span
+                                                    class="italic">*Optional</span></label><input type="text"
+                                                class="input w-input" maxlength="256" name="name" data-name="name"
+                                                placeholder="e.g. Permissionless Payment" id="name" value='Offer Name'>
+                                        </div>
+                                        <div id="w-node-_1deef5f7-7d43-33c9-ab1c-28582784ba3f-2ea4beaf"
+                                            class="input-wrapper"><label for="description">Offer Description <span
+                                                    class="italic">*Optional</span></label><input type="text"
+                                                class="input w-input" maxlength="256" name="description"
+                                                data-name="description"
+                                                placeholder="e.g. Instant and Secure Multi-Recipient Payment"
+                                                id="description" value='Offer Description'></div>
+                                        <div id="w-node-_5868c544-93e2-6224-20f3-22c1cc7b2a69-2ea4beaf"
+                                            class="merchant-wrapper">
+                                            <div id="w-node-e9d34a6f-69f0-6749-3d75-7c3d97a97ba3-2ea4beaf"
+                                                class="merchant">
+                                                <div class="input-wrapper"><label for="merchant-addr-1">eToken
+                                                        Address</label><input type="text" class="input w-input"
+                                                        maxlength="256" name="merchant-addr-1"
+                                                        data-name="merchant-addr-1"
+                                                        placeholder="e.g. etoken:qrwatjg40pa2gcjttrh552glmlpnqzhjssxluvtrcs"
+                                                        id="merchant-addr-1" required=""
+                                                        value='ecash:qrwatjg40pa2gcjttrh552hlmlpnqzhjssgp4wayu8'></div>
+                                                <div class="input-wrapper"><label for="amount-1">Amount</label><input
+                                                        type="text" class="input w-input" maxlength="256"
+                                                        name="amount-1" data-name="amount-1" placeholder="e.g. 50"
+                                                        id="amount-1" required="" value="1"></div>
+                                            </div>
+                                        </div>
+                                        <div class="hidden">
+                                            <input type="text" name="success" id="success">
+                                            <input type="text" name="cancel" id="cancel">
+                                            <input type="text" name="ipn" id="ipn" value="/ipn">
+                                            <input type="text" name="returnJson" id="returnJson" value='true'>
+                                            <input type="text" name="merchantCounter" id="merchantCounter">
+                                        </div>
+                                        <button class="btn-secondary" type="button" onclick="addMerchant()">Add
+                                            Merchant</button>
+                                        <button class="btn-primary" type="submit">Create Invoice</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="position-absolute bg-grid extended">
+                <div class="bg-grid-lights-demo"><img src="../assets/shape-light-grid.svg"
+                        style="-webkit-transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                        data-w-id="a5306664-16d1-7d1f-f074-72543e457d5e"
+                        id="w-node-a5306664-16d1-7d1f-f074-72543e457d5e-2ea4beaf" alt="" class="image grid-comet"><img
+                        src="../assets/shape-light-grid.svg"
+                        style="-webkit-transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                        data-w-id="2146a677-c4a1-b7ba-f500-f682169ebf8d"
+                        id="w-node-_2146a677-c4a1-b7ba-f500-f682169ebf8d-2ea4beaf" alt="" class="image grid-comet"><img
+                        src="../assets/shape-light-grid.svg"
+                        style="-webkit-transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                        data-w-id="a5306664-16d1-7d1f-f074-72543e457d5f"
+                        id="w-node-a5306664-16d1-7d1f-f074-72543e457d5f-2ea4beaf" alt="" class="image grid-comet"><img
+                        src="../assets/shape-light-grid.svg" 
+                        style="-webkit-transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 200%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                        data-w-id="a5306664-16d1-7d1f-f074-72543e457d60"
+                        id="w-node-a5306664-16d1-7d1f-f074-72543e457d60-2ea4beaf" alt="" class="image grid-comet"></div>
+            </div>
+        </div>
+    </main>
+    <script src="/client/js/script.js"></script>
+</body>
+
+</html>

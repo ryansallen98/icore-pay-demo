@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --dark1: #0b101b;
+    --dark2: #181e29;
+    --dark3: #353c4a;
+    --light1: #ffffff;
+    --light2: #f0f3f8;
+    --light3: #c9ced6;
+    --blue1: #144ee3;
+    --blue2: #1b6eff;
+}
+
+body {
+    margin: 0;
+    background-color: var(--dark1);
+    color: var(--light3);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+
+p {
+    overflow-wrap: break-word;
+}
+
+section {
+    padding-block: 80px;
+}
+
+.hidden {
+    display: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    margin-inline: auto;
+
+}
+
+.form {
+    padding: 66px 55px;
+    background-color: var(--dark2);
+    border-radius: 14px;
+    box-shadow: 0 2px 7px 0 hsla(214.28571428571428, 33.33%, 4.12%, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.input-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--light1);
+}
+
+input {
+    width: 100%;
+    padding: 16px 24px;
+    box-sizing: border-box;
+    min-height: 58px;
+    font-weight: 500;
+    line-height: 1.125em;
+    color: var(--light1);
+    background-color: var(--dark3);
+    border: 0px solid var(--dark3);
+    border-radius: 100px;
+}
+
+.btn-primary {
+    padding: 20px 24px;
+    width: 100%;
+    font-weight: bold;
+    color: var(--light1);
+    background-color: var(--blue1);
+    border: 0px solid var(--blue1);
+    border-radius: 100px;
+    font-size: 16px;
+}
+
+.btn-primary:hover {
+    background-color: var(--blue2);
+}
+
+.btn-seconday {
+    padding: 20px 24px;
+    width: 100%;
+    font-weight: bold;
+    color: var(--light1);
+    background-color: var(--dark2);
+    border: 1px solid var(--dark3);
+    border-radius: 100px;
+    font-size: 16px;
+}
+
+.btn-seconday:hover {
+    background-color: var(--dark1);
+}
+
+
+#download-pdf {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    section {
+        padding: 0px;
+    }
+
+    .form {
+        border-radius: 0px;
+    }
+}
