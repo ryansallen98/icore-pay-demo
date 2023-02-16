@@ -115,7 +115,7 @@ app.set('trust proxy', true);
 // Serve the login form
 app.get("/login", (req, res) => {
   if (!req.user) {
-    res.sendFile(__dirname + '/html/login.html');
+    res.sendFile(__dirname + '/client/login.html');
     return;
   }
   res.redirect("/invoice");
@@ -136,7 +136,7 @@ app.get("/invoice", (req, res) => {
     res.redirect("/login");
     return;
   }
-  res.sendFile(__dirname + '/html/invoice.html');
+  res.sendFile(__dirname + '/client/invoice.html');
 });
 
 // Handle the invoice form submission
