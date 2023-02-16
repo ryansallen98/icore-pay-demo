@@ -3857,3 +3857,14 @@ label {
 .hidden {
   display: none;
 }
+
+.button-wrap {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+
+}
+
+p {
+  overflow-wrap: break-word;
+}

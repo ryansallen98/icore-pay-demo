@@ -42,30 +42,30 @@
                                         <div id='receipt'>
                                             <div>
                                                 <h1 id="title">Invoice</h1>
-                                                <p>Date Issuesed: <%= date_issued %>
+                                                <p>Date Issuesed: Thu Feb 16 2023 12:05:38 GMT+0000 (Greenwich Mean Time)
                                                 </p>
                                                 <p>Pay to:
-                                                    <%= merchant %>
+                                                    Merchant Name
                                                 </p>
                                                 <p>Invoice ID: <span id="invoice-id">
-                                                        <%= invoice %>
+                                                        36afi
                                                     </span>
                                                 </p>
                                                 <p>Amount: <span id="amount-display">
-                                                        <%= amount %>
+                                                        1
                                                     </span>
                                                 </p>
                                                 <p>Status: <span id="status">Unpaid</span></p>
                                             </div>
                                             <div>
-                                                <p>Product: <%= name %>
+                                                <p>Product: Offer Name
                                                 </p>
-                                                <p>Description: <%= description %>
+                                                <p>Description: Offer Description
                                                 </p>
                                             </div>
                                             <div>
                                                 <p>eToken Address: <span id="address-display">
-                                                        <%= address %>
+                                                        ecash:qrwatjg40pa2gcjttrh552hlmlpnqzhjssgp4wayu8
                                                     </span>
                                                 </p>
                                             </div>
@@ -78,12 +78,12 @@
                                                     class="image rounded w-node-_2dbb5ac2-94dc-153b-eb21-ac867af86237-2ea4beaf">
                                             </div>
                                         </div>
-                                        <div class="button-wrap">
-                                            <button class="btn-secondary full mg-top-20px" type="button" id="qr-button"
+                                            <button class="btn-secondary full mg-top-20px" type="button" id="download-pdf">Download
+                                                PDF</button>
+                                            <button class="btn-secondary full mg-top-20px mg-bottom-20px" type="button" id="qr-button"
                                                 onclick="getQR()">Get QR Code</button>
-                                            <a class="mg-top-20px" id="submit" href="<%= payUrl %>"><button id="submit-button"
-                                                    class="btn-primary full">Pay This Invoice</button></a>
-                                        </div>
+                                            <a class="mg-top-20px" id="submit" href="https://pay.badger.cash/i/2VNT7"><button id="submit-button"
+                                                    class="btn-primary">Pay This Invoice</button></a>
                                     </div>
                                 </div>
                             </div>

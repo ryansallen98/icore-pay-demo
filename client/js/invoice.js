@@ -4,6 +4,7 @@ const invoice = document.getElementById('invoice-id').innerText;
 const address = document.getElementById('address-display').innerText;
 const amount = document.getElementById('amount-display').innerText;
 const payUrl = document.getElementById('submit').href;
+const button = document.getElementById('submit');
 
 document.getElementById('qr-wrapper').style.display = 'none';
 window.addEventListener('load', checkStatus());
@@ -41,7 +42,7 @@ setTimeout(function () {
     checkStatus();
 }, 1000);
 
-form.addEventListener('submit', loading);
+document.querySelector("#submit").addEventListener("click", loading);
 
 function loading() {
     document.getElementById('submit-button').innerText = 'Please wait...';
@@ -60,42 +61,25 @@ let payId;
 async function getQR() {
     console.log(payUrl)
     // create a new request for the QR code
-     let qrImage,
-         qrReq,
-         qrHeader = new Headers();
-     qrHeader.append('Accept', 'image/png');
-     qrReq = new Request(payUrl, { 
-       method: 'GET',
-       headers: qrHeader,
-       mode: 'cors'
-     });
-     fetch(qrReq) 
-       .then(response => response.blob())
-       .then((blob) => {
-       qrImage = URL.createObjectURL(blob) 
-       //set the QR code image source
-       document.getElementById('qr-code').src = qrImage;
-       document.getElementById('qr-button').style.display = 'none'
-       document.getElementById('qr-wrapper').style.display = 'block';
-     })
-       .catch((err) => {
-       console.log('ERROR:', err.message);
-     });
-   }
-
-// Add the PDF download functionality
-const downloadPDF = () => {
-    const pdf = new jsPDF();
-    const receipt = document.querySelector("#receipt");
-
-    // Add CSS styles to set text color to black
-    receipt.style.color = "black";
-
-    pdf.fromHTML(receipt, 15, 15, {
-        width: 170
+    let qrImage,
+        qrReq,
+        qrHeader = new Headers();
+    qrHeader.append('Accept', 'image/png');
+    qrReq = new Request(payUrl, {
+        method: 'GET',
+        headers: qrHeader,
+        mode: 'cors'
     });
-    pdf.save("receipt.pdf");
-    receipt.style.color = "#c9ced6";
-};
-
-document.querySelector("#download-pdf").addEventListener("click", downloadPDF);
+    fetch(qrReq)
+        .then(response => response.blob())
+        .then((blob) => {
+            qrImage = URL.createObjectURL(blob)
+            //set the QR code image source
+            document.getElementById('qr-code').src = qrImage;
+            document.getElementById('qr-button').style.display = 'none'
+            document.getElementById('qr-wrapper').style.display = 'block';
+        })
+        .catch((err) => {
+            console.log('ERROR:', err.message);
+        });
+}
