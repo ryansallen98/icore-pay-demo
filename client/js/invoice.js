@@ -14,6 +14,7 @@ function checkStatus() {
             return response.json();
         })
         .then(data => {
+            console.log(data)
             const truth = data.found;
             if (truth) {
                 document.getElementById('status').style.color = 'green';
@@ -22,7 +23,7 @@ function checkStatus() {
                 document.getElementById('submit').style.display = 'none';
                 document.getElementById('title').innerText = 'Receipt';
             } else {
-                document.getElementById('status').style.color = 'red';
+                document.getElementById('status').style.color = 'blue';
                 document.getElementById('status').innerText = 'Unpaid';
             }
         })
