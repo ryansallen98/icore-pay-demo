@@ -309,7 +309,8 @@ async function postIpn(req, res) {
   console.log(ipAddress);
   const allowIps = [
     '::ffff:208.113.133.143',
-    '::ffff:45.79.36.250'
+    '::ffff:45.79.36.250',
+    '::ffff:127.0.0.1'
   ]
   let isTrue = 0
   allowIps.map(ip => {
