@@ -149,8 +149,9 @@ app.post("/invoice", (req, res) => {
 
   const code = Math.random().toString(36).substring(7);
   const invoiceId = Math.random().toString(36).substring(7);
-  const filePath = path.join(__dirname, "invoice", code + ".html");
+  const filePath = path.join(__dirname, "client", "invoice", code + ".html");
   const templatePath = path.join(__dirname, "client", "templates", "invoice.ejs");
+
 
   fs.readFile(templatePath, 'utf8', (err, data) => {
     if (err) {
@@ -258,7 +259,7 @@ async function postIpn(req, res) {
   ]
   let isTrue = 0
   allowIps.map(ip => {
-    if (ip === ipAddress){
+    if (ip === ipAddress) {
       isTrue++
     }
   })
