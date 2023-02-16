@@ -150,7 +150,7 @@ app.post("/invoice", (req, res) => {
   const code = Math.random().toString(36).substring(7);
   const invoiceId = Math.random().toString(36).substring(7);
   const filePath = path.join(__dirname, "invoice", code + ".html");
-  const templatePath = path.join(__dirname, "templates", "invoice.ejs");
+  const templatePath = path.join(__dirname, "client", "templates", "invoice.ejs");
 
   fs.readFile(templatePath, 'utf8', (err, data) => {
     if (err) {
