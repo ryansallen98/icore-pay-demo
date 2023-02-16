@@ -198,7 +198,7 @@ app.post("/invoice", (req, res) => {
 });
 
 app.get("/invoice/:code", (req, res) => {
-  const filePath = path.join(__dirname, "invoice", req.params.code + ".html");
+  const filePath = path.join(__dirname, "client", "invoice", req.params.code + ".html");
   res.sendFile(filePath);
 });
 
