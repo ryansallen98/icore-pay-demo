@@ -25,7 +25,6 @@ function checkStatus() {
             if (truth) {
                 document.getElementById('status').style.color = 'green';
                 document.getElementById('status').innerText = 'Paid';
-                document.getElementById('download-pdf').style.display = 'block';
                 document.getElementById('submit').style.display = 'none';
                 document.getElementById('qr-button').style.display = 'none';
                 document.getElementById('title').innerText = 'Receipt';
