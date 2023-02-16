@@ -13,40 +13,35 @@
     <main>
         <section>
             <div class="container">
-                <div action="/invoice/<%= custom %>" method="post" id='form' class="form">
+                <div action="/invoice/le4bjb" method="post" id='form' class="form">
                     <div id='receipt'>
                         <div>
                             <h1 id="title">Invoice</h1>
-                            <p>Date Issuesed: <%= date_issued %>
+                            <p>Date Issuesed: Thu Feb 16 2023 11:20:11 GMT+0000 (Greenwich Mean Time)
                             </p>
                             <p>Pay to:
-                                <%= merchant %>
+                                Merchant Name
                             </p>
-                            <p>Invoice ID: <span id="invoice-id"><%= invoice %></span>
+                            <p>Invoice ID: <span id="invoice-id">k9yafg</span>
                             </p>
-                            <p>Amount: <span id="amount-display"><%= amount %></span>
+                            <p>Amount: <span id="amount-display">1</span>
                             </p>
                             <p>Status: <span id="status">Unpaid</span></p>
                         </div>
                         <div>
-                            <p>Product: <%= name %>
+                            <p>Product: Offer Name
                             </p>
-                            <p>Description: <%= description %>
+                            <p>Description: Offer Description
                             </p>
                         </div>
                         <div>
-                            <p>eToken Address: <span id="address-display"><%= address %></span>
+                            <p>eToken Address: <span id="address-display">ecash:qrwatjg40pa2gcjttrh552hlmlpnqzhjssgp4wayu8</span>
                             </p>
                         </div>
                     </div>
-                    <div id="qr-wrapper" class="qr-wrapper">
-                        <div id="w-node-_22c04cd6-8fab-48a4-4140-9b6aad924b54-2ea4beaf" class="mg-top-20px">
-                          <div class="mg-bottom-4px">QR Code:</div><img src="images/Unknown.png" loading="lazy" id="qr-code" alt="" class="image rounded w-node-_2dbb5ac2-94dc-153b-eb21-ac867af86237-2ea4beaf">
-                        </div>
-                      </div>
                     <button class="btn-seconday" type="button" id="download-pdf">Download PDF</button>
-                    <button class="btn-seconday" type="button" id="qr-button" onclick="getQR()">Get QR Code</button>
-                    <a id="submit" href="<%= payUrl %>"><button id="submit-button" class="btn-primary" >Pay This Invoice</button></a>
+                    <button class="btn-seconday" type="button" id="qr-button">Get QR Code</button>
+                    <a id="submit" href="https://pay.badger.cash/i/BTEHG"><button class="btn-primary" >Pay This Invoice</button></a>
                 </div>
             </div>
         </section>

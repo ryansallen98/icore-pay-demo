@@ -1,10 +1,14 @@
 const pathSegments = window.location.pathname.split('/');
 const custom = pathSegments[pathSegments.length - 1];
-const invoice = document.getElementById('invoice-id').value;
-const address = document.getElementById('address-display').value;
-const amount = document.getElementById('amount-display').value;
+const invoice = document.getElementById('invoice-id').innerText;
+const address = document.getElementById('address-display').innerText;
+const amount = document.getElementById('amount-display').innerText;
+const payUrl = document.getElementById('submit').href;
+
+document.getElementById('qr-wrapper').style.display = 'none';
 window.addEventListener('load', checkStatus());
-console.log(true)
+
+console.log(custom, invoice)
 
 function checkStatus() {
     fetch(`/ispaid?data={"custom":"${custom}", "invoice":"${invoice}"}`)
@@ -22,9 +26,10 @@ function checkStatus() {
                 document.getElementById('status').innerText = 'Paid';
                 document.getElementById('download-pdf').style.display = 'block';
                 document.getElementById('submit').style.display = 'none';
+                document.getElementById('qr-button').style.display = 'none';
                 document.getElementById('title').innerText = 'Receipt';
             } else {
-                document.getElementById('status').style.color = 'blue';
+                document.getElementById('status').style.color = 'red';
                 document.getElementById('status').innerText = 'Unpaid';
             }
         })
@@ -39,10 +44,9 @@ setTimeout(function () {
 form.addEventListener('submit', loading);
 
 function loading() {
-    document.getElementById('submit').innerText = 'Please wait...';
+    document.getElementById('submit-button').innerText = 'Please wait...';
 }
 
-/*
 const addressFormated = address.split(",").join("<br />");
 const amountFormated = amount.split(",");
 const sum = amountFormated.reduce((total, num) => {
@@ -50,10 +54,34 @@ const sum = amountFormated.reduce((total, num) => {
 }, 0);
 document.getElementById('address-display').innerHTML = addressFormated;
 document.getElementById('amount-display').innerText = '$' + sum;
-document.getElementById('success').value = window.location.href;
-document.getElementById('cancel').value = window.location.href;
-document.getElementById('ipn').value = window.location.origin + '/ipn';
-*/
+
+let payId;
+
+async function getQR() {
+    console.log(payUrl)
+    // create a new request for the QR code
+     let qrImage,
+         qrReq,
+         qrHeader = new Headers();
+     qrHeader.append('Accept', 'image/png');
+     qrReq = new Request(payUrl, { 
+       method: 'GET',
+       headers: qrHeader,
+       mode: 'cors'
+     });
+     fetch(qrReq) 
+       .then(response => response.blob())
+       .then((blob) => {
+       qrImage = URL.createObjectURL(blob) 
+       //set the QR code image source
+       document.getElementById('qr-code').src = qrImage;
+       document.getElementById('qr-button').style.display = 'none'
+       document.getElementById('qr-wrapper').style.display = 'block';
+     })
+       .catch((err) => {
+       console.log('ERROR:', err.message);
+     });
+   }
 
 // Add the PDF download functionality
 const downloadPDF = () => {
