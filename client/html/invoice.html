@@ -40,22 +40,22 @@
                                 <div class="demo-form-block w-form">
                                     <form id="form" name="wf-form-Demo" data-name="Demo" method="post" action="/invoice"
                                         class="demo-form">
-                                        <div class="input-wrapper"><label for="merchant">Merchant Name</label><input
+                                        <div class="input-wrapper"><label for="merchant">Recipient Name</label><input
                                                 type="text" class="input w-input" maxlength="256" name="merchant"
-                                                data-name="merchant" placeholder="e.g. iCore Pay" id="merchant"
-                                                required="" value='Merchant Name'></div>
+                                                data-name="merchant" placeholder="e.g. merchant_name" id="merchant"
+                                                required=""></div>
                                         <div class="input-wrapper"><label for="name">Offer Name <span
                                                     class="italic">*Optional</span></label><input type="text"
                                                 class="input w-input" maxlength="256" name="name" data-name="name"
-                                                placeholder="e.g. Permissionless Payment" id="name" value='Offer Name'>
+                                                placeholder="e.g. offer_name" id="name">
                                         </div>
                                         <div id="w-node-_1deef5f7-7d43-33c9-ab1c-28582784ba3f-2ea4beaf"
                                             class="input-wrapper"><label for="description">Offer Description <span
                                                     class="italic">*Optional</span></label><input type="text"
                                                 class="input w-input" maxlength="256" name="description"
                                                 data-name="description"
-                                                placeholder="e.g. Instant and Secure Multi-Recipient Payment"
-                                                id="description" value='Offer Description'></div>
+                                                placeholder="e.g. offer_description"
+                                                id="description"></div>
                                         <div id="w-node-_5868c544-93e2-6224-20f3-22c1cc7b2a69-2ea4beaf"
                                             class="merchant-wrapper">
                                             <div id="w-node-e9d34a6f-69f0-6749-3d75-7c3d97a97ba3-2ea4beaf"
@@ -67,7 +67,7 @@
                                                         placeholder="e.g. etoken:qrwatjg40pa2gcjttrh552glmlpnqzhjssxluvtrcs"
                                                         id="merchant-addr-1" required=""
                                                         value='ecash:qrwatjg40pa2gcjttrh552hlmlpnqzhjssgp4wayu8'></div>
-                                                <div class="input-wrapper"><label for="amount-1">Amount</label><input
+                                                <div class="input-wrapper"><label for="amount-1">BUX Amount</label><input
                                                         type="text" class="input w-input" maxlength="256"
                                                         name="amount-1" data-name="amount-1" placeholder="e.g. 50"
                                                         id="amount-1" required="" value="1"></div>
@@ -81,7 +81,7 @@
                                             <input type="text" name="merchantCounter" id="merchantCounter">
                                         </div>
                                         <button class="btn-secondary" type="button" onclick="addMerchant()">Add
-                                            Merchant</button>
+                                            Recipient</button>
                                         <button class="btn-primary" type="submit">Create Invoice</button>
                                     </form>
                                 </div>
